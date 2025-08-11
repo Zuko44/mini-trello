@@ -1,39 +1,24 @@
 # mini-trello
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+## Как запустить
 
 ```sh
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## Краткое описание архитектуры
 
-```sh
-npm run build
-```
+Приложение реализовано на Vue 3 + TypeScript с использованием Composition API и Pinia для управления состоянием. Состояние задач хранится в tasks сторе (src/stores/tasks.ts) и автоматически сохраняется между сессиями через pinia-plugin-persistence. Типы Task и Status вынесены в src/types/task.ts для переиспользования и строгой типизации. Интерфейс разбит на три основных компонента: Board (контейнер + поиск), Column (отдельная колонка с задачами определённого статуса) и TaskCard (карточка задачи с редактированием, удалением и перетаскиванием). Поиск выполняется в реальном времени без учёта регистра. Перетаскивание реализовано на нативном HTML5 Drag&Drop API.
 
-### Lint with [ESLint](https://eslint.org/)
+## Что не успел / сделал бы иначе при наличии времени
 
-```sh
-npm run lint
-```
+- Добавить сортировку задач внутри колонок с сохранением порядка.
+
+- Реализовать поддержку мобильного drag & drop через Pointer Events.
+
+- Добавить анимацию при перемещении задач и интерактивные hover-эффекты.
+
+- Расширить валидацию ввода и обработку пустых состояний.
+
+- Покрыть логику Pinia стора базовыми тестами.

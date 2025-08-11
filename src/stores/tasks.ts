@@ -1,21 +1,17 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { nanoid } from 'nanoid'
 import type { Task, Status } from '@/types/task'
-
-//уникальный идентификатор для каждой задачи
-function uid(): string {
-  return Date.now().toString(36) + Math.random().toString(36).slice(2, 8)
-}
 
 export const useTasksStore = defineStore(
   'tasks',
   () => {
     const tasks = ref<Task[]>([])
 
-    function addTask(status: Status, title: string): void {
+    function addTask(status: Status, title: string) {
       const trimmed = title.trim()
       if (!trimmed) return
-      tasks.value.push({ id: uid(), title: trimmed, status })
+      tasks.value.push({ id: nanoid(), title: trimmed, status })
     }
 
     function updateTaskTitle(id: string, title: string): void {
